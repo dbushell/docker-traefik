@@ -47,3 +47,7 @@ Or via the `dynamic.toml` config file:
 ```
 
 See the [Traefik documentation](https://doc.traefik.io/traefik/providers/docker/) for more details.
+
+* * *
+
+[MIT License](/LICENSE) | Copyright © 2021 [David Bushell](https://dbushell.com) | [@dbushell](https://twitter.com/dbushell)
