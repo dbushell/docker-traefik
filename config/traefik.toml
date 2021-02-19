@@ -1,0 +1,15 @@
+[api]
+  dashboard = true
+  insecure = true
+
+[entryPoints]
+  [entryPoints.web]
+    address = ":80"
+
+[providers.docker]
+  exposedByDefault = false
+  network = "traefik"
+
+[providers.file]
+  filename = "/etc/traefik/dynamic.toml"
+  watch = true

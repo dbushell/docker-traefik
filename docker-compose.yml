@@ -1,0 +1,29 @@
+version: "3"
+
+networks:
+  traefik:
+    external: true
+
+services:
+  traefik:
+    container_name: traefik
+    image: traefik:v2.4
+    restart: unless-stopped
+    networks:
+      - traefik
+    ports:
+      - 80:80
+    volumes:
+      - ./config:/etc/traefik
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+
+  whoami:
+    container_name: whoami
+    image: traefik/whoami
+    restart: unless-stopped
+    networks:
+      - traefik
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.whoami.rule=Host(`whoami.localhost`)"
+      - "traefik.http.services.whoami.loadbalancer.server.port=80"
