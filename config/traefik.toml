@@ -2,6 +2,9 @@
   dashboard = true
   insecure = true
 
+[pilot]
+  dashboard = false
+
 [entryPoints]
   [entryPoints.web]
     address = ":80"
