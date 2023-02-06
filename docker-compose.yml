@@ -11,21 +11,23 @@ services:
     networks:
       - traefik
     ports:
-      - "${TRFK_HTTP_PORT}:80"
-      - "${TRFK_HTTPS_PORT}:443"
+      - "${TRFK_HOST_IP}:${TRFK_HTTP_PORT}:80"
+      - "${TRFK_HOST_IP}:${TRFK_HTTPS_PORT}:443"
     volumes:
       - ./config:/etc/traefik
+      - ./.acme.json:/acme.json
       - /var/run/docker.sock:/var/run/docker.sock:ro
     env_file:
       - .env
 
-#  whoami:
-#    container_name: whoami
-#    image: traefik/whoami
-#    restart: unless-stopped
-#    networks:
-#      - traefik
-#    labels:
-#      - "traefik.enable=true"
-#      - "traefik.http.routers.whoami.rule=Host(`whoami.localhost`)"
-#      - "traefik.http.services.whoami.loadbalancer.server.port=80"
+  whoami:
+    container_name: whoami
+    image: traefik/whoami
+    restart: unless-stopped
+    networks:
+      - traefik
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.whoami.entrypoints=websecure"
+      - "traefik.http.routers.whoami.rule=Host(`whoami.${TRFK_ACME_DOMAIN}`)"
+      - "traefik.http.services.whoami.loadbalancer.server.port=80"

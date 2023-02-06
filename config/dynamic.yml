@@ -1,0 +1,16 @@
+http:
+  routers:
+    api:
+      entryPoints: ['websecure']
+      rule: "Host(`dashboard.{{ env "TRFK_ACME_DOMAIN" }}`)"
+      service: api@internal
+
+#     whoami:
+#       entryPoints: ['websecure']
+#       rule: "Host(`whoami.{{ env "TRFK_ACME_DOMAIN" }}`)"
+#       service: whoami
+#   services:
+#       loadBalancer:
+#     whoami:
+#         servers:
+#           - url: "http://whoami"

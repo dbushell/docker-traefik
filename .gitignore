@@ -6,5 +6,5 @@
 !config
 config/*
 !config/entrypoint.sh
-!config/dynamic.toml
+!config/dynamic.yml
 !config/template.toml

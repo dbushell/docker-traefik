@@ -4,21 +4,32 @@
 
 [api]
   dashboard = true
-  insecure = true
 
 [pilot]
   dashboard = false
-
-[entryPoints]
-  [entryPoints.web]
-    address = ":$TRFK_HTTP_PORT"
-  [entryPoints.websecure]
-    address = ":$TRFK_HTTPS_PORT"
 
 [providers.docker]
   exposedByDefault = false
   network = "traefik"
 
 [providers.file]
-  filename = "/etc/traefik/dynamic.toml"
+  filename = "/etc/traefik/dynamic.yml"
   watch = true
+
+[entryPoints]
+  [entryPoints.web]
+    address = ":$TRFK_HTTP_PORT"
+  [entryPoints.websecure]
+    address = ":$TRFK_HTTPS_PORT"
+    [entryPoints.websecure.http.tls]
+      certResolver = "myresolver"
+      [[entryPoints.websecure.http.tls.domains]]
+        main = "$TRFK_ACME_DOMAIN"
+        sans = ["*.$TRFK_ACME_DOMAIN"]
+
+[certificatesResolvers.myresolver.acme]
+  email = "$TRFK_ACME_EMAIL"
+  storage = "acme.json"
+  [certificatesResolvers.myresolver.acme.dnsChallenge]
+    provider = "$TRFK_ACME_PROVIDER"
+    resolvers = ["$TRFK_ACME_RESOLVER"]
