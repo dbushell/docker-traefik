@@ -1,3 +1,7 @@
+[global]
+  checkNewVersion = false
+  sendAnonymousUsage = false
+
 [api]
   dashboard = true
   insecure = true
@@ -7,7 +11,9 @@
 
 [entryPoints]
   [entryPoints.web]
-    address = ":80"
+    address = ":$TRFK_HTTP_PORT"
+  [entryPoints.websecure]
+    address = ":$TRFK_HTTPS_PORT"
 
 [providers.docker]
   exposedByDefault = false
