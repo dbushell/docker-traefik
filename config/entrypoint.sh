@@ -10,8 +10,7 @@ echo "Generating Traefik config: $TRFK_CONFIG"
 {
   apk add gettext
   envsubst < $TRFK_TEMPLATE > $TRFK_CONFIG
+  echo -e "$TRFK_CONFIG_NOTICE$(cat $TRFK_CONFIG)" > $TRFK_CONFIG
 } &> /dev/null
-
-echo -e "$TRFK_CONFIG_NOTICE$(cat $TRFK_CONFIG)" > $TRFK_CONFIG
 
 exec traefik
