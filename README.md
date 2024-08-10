@@ -74,4 +74,4 @@ See the [Traefik documentation](https://doc.traefik.io/traefik/providers/docker/
 
 * * *
 
-[MIT License](/LICENSE) | Copyright © 2023 [David Bushell](https://dbushell.com) | [@dbushell](https://twitter.com/dbushell)
+[MIT License](/LICENSE) | Copyright © 2023 [David Bushell](https://dbushell.com)
